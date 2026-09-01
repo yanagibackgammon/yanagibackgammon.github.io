@@ -208,10 +208,6 @@ h1 {
   fill: #ffffff;
 }
 
-@media (max-width: 959px) {
-  .pc-embeds { display: none; }
-}
-
 @media (max-width: 700px) {
   .triangle {
     border-left-width: 78px;
@@ -231,6 +227,24 @@ h1 {
     gap: 20px;
     width: calc(100% - 28px);
     padding: 28px 0;
+  }
+
+  .pc-embeds {
+    width: 100%;
+  }
+
+  .embed-card {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .embed-card h2 {
+    margin-bottom: 10px;
+    font-size: 17px;
+  }
+
+  .embed-frame {
+    border-radius: 14px;
   }
 
   .action-links {
