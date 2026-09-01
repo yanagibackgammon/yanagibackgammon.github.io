@@ -1,9 +1,10 @@
 :root {
-  --green: #529a70;
-  --green-dark: #438463;
-  --green-light: #72b093;
-  --teal: #184b57;
-  --pale: #e8eaff;
+  --green: #4d966b;
+  --green-deep: #3e7d5a;
+  --teal: #16434f;
+  --teal-deep: #103640;
+  --mist: #e8eaff;
+  --mint: #6da98a;
 }
 
 * { box-sizing: border-box; }
@@ -16,188 +17,205 @@ html, body {
 
 body {
   min-height: 100vh;
-  overflow: hidden;
-  background: var(--green);
+  color: var(--mist);
+  background:
+    radial-gradient(circle at 12% 16%, rgba(232,234,255,.12), transparent 20%),
+    radial-gradient(circle at 85% 12%, rgba(109,169,138,.18), transparent 28%),
+    linear-gradient(135deg, var(--green) 0%, #5aa172 35%, #4d966b 50%, #41805d 100%);
   font-family: Inter, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
 .landing {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
-  isolation: isolate;
   display: grid;
   place-items: center;
-}
-
-.brand-icon {
-  position: absolute;
-  z-index: 3;
-  top: clamp(18px, 3vw, 34px);
-  left: clamp(18px, 3vw, 34px);
-  width: clamp(52px, 6vw, 78px);
-  height: auto;
-  border-radius: 18%;
-  box-shadow: 0 12px 30px rgba(17, 55, 63, .18);
-}
-
-.art {
-  position: absolute;
-  inset: -6%;
-  z-index: 0;
+  isolation: isolate;
   overflow: hidden;
 }
 
-/* アイコンのバックギャモンポイントを思わせる縦長三角形 */
-.point {
+.bg-art {
   position: absolute;
-  top: -10%;
-  width: 0;
-  height: 0;
-  border-left: clamp(68px, 8.5vw, 150px) solid transparent;
-  border-right: clamp(68px, 8.5vw, 150px) solid transparent;
-  border-top: 112vh solid var(--green-dark);
-  opacity: .9;
-  transform-origin: 50% 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.point:nth-child(even) {
-  border-top-color: var(--green-light);
+.shape {
+  position: absolute;
+  opacity: .94;
+  filter: drop-shadow(0 24px 40px rgba(0,0,0,.08));
+}
+
+.circle {
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.circle-a {
+  width: 320px;
+  height: 320px;
+  top: 10%;
+  left: -60px;
+}
+
+.circle-b {
+  width: 220px;
+  height: 220px;
+  top: 54%;
+  right: 10%;
+  background: rgba(22,67,79,.92);
+}
+
+.circle-c {
+  width: 120px;
+  height: 120px;
+  bottom: 16%;
+  left: 18%;
+  background: var(--mist);
   opacity: .72;
 }
 
-.point-1 { left: -4%; transform: rotate(4deg); }
-.point-2 { left: 17%; transform: rotate(-4deg); }
-.point-3 { left: 38%; transform: rotate(3deg); }
-.point-4 { left: 59%; transform: rotate(-4deg); }
-.point-5 { left: 78%; transform: rotate(3deg); }
-.point-6 { left: 96%; transform: rotate(-4deg); }
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 115px solid transparent;
+  border-right: 115px solid transparent;
+  border-bottom: 330px solid rgba(232,234,255,.22);
 }
 
-.circle-dark {
-  background: var(--teal);
-  width: clamp(240px, 31vw, 510px);
-  aspect-ratio: 1;
-  right: clamp(-90px, 2vw, 40px);
+.triangle-a {
+  top: -10px;
+  left: 14%;
+  transform: rotate(8deg);
 }
 
-.circle-top { top: -5%; }
-.circle-bottom { bottom: -11%; }
-
-.circle-light {
-  width: clamp(220px, 30vw, 480px);
-  aspect-ratio: 1;
-  left: clamp(-105px, 1vw, 34px);
-  bottom: -7%;
-  background: var(--pale);
+.triangle-b {
+  top: 26%;
+  right: 2%;
+  transform: rotate(180deg) scale(.9);
+  border-bottom-color: rgba(22,67,79,.22);
 }
 
-/* 四角はアイコンの幾何学感を崩さないよう、半透明で重ねる */
+.triangle-c {
+  bottom: -50px;
+  left: 56%;
+  transform: rotate(-12deg);
+  border-bottom-color: rgba(109,169,138,.42);
+}
+
 .square {
-  position: absolute;
-  background: rgba(232, 234, 255, .12);
-  border: 1px solid rgba(232, 234, 255, .16);
-  backdrop-filter: blur(2px);
+  background: rgba(232,234,255,.16);
+  border: 1px solid rgba(232,234,255,.18);
+  backdrop-filter: blur(4px);
 }
 
-.square-1 {
-  width: clamp(100px, 13vw, 210px);
-  aspect-ratio: 1;
-  left: 31%;
-  top: 16%;
+.square-a {
+  width: 220px;
+  height: 220px;
+  top: 14%;
+  right: 18%;
+  transform: rotate(22deg);
+}
+
+.square-b {
+  width: 140px;
+  height: 140px;
+  bottom: 20%;
+  right: 24%;
+  transform: rotate(-14deg);
+  background: rgba(22,67,79,.20);
+  border-color: rgba(22,67,79,.22);
+}
+
+.square-c {
+  width: 90px;
+  height: 90px;
+  top: 58%;
+  left: 44%;
   transform: rotate(18deg);
+  background: rgba(232,234,255,.10);
 }
 
-.square-2 {
-  width: clamp(76px, 9vw, 150px);
-  aspect-ratio: 1;
-  left: 48%;
-  bottom: 11%;
-  transform: rotate(-13deg);
-  background: rgba(24, 75, 87, .10);
-  border-color: rgba(24, 75, 87, .12);
-}
-
-.square-3 {
-  width: clamp(58px, 6vw, 104px);
-  aspect-ratio: 1;
-  right: 32%;
-  top: 42%;
-  transform: rotate(33deg);
-  background: rgba(232, 234, 255, .10);
+.square-d {
+  width: 68px;
+  height: 68px;
+  top: 18%;
+  left: 54%;
+  transform: rotate(-24deg);
+  background: rgba(109,169,138,.20);
 }
 
 .position-link {
   position: relative;
-  z-index: 4;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: min(78vw, 360px);
   min-height: 64px;
   padding: 18px 34px;
-  border: 1px solid rgba(232, 234, 255, .68);
+  border: 1px solid rgba(232,234,255,.72);
   border-radius: 999px;
-  background: rgba(24, 75, 87, .91);
-  color: var(--pale);
+  background: rgba(16,54,64,.90);
+  color: var(--mist);
   text-decoration: none;
   font-size: clamp(16px, 2vw, 22px);
   font-weight: 800;
   letter-spacing: .16em;
-  box-shadow: 0 18px 46px rgba(17, 55, 63, .25);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 46px rgba(7,24,28,.28);
+  backdrop-filter: blur(9px);
   transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
 
 .position-link:hover,
 .position-link:focus-visible {
-  transform: translateY(-3px) scale(1.01);
-  background: #123f4a;
-  box-shadow: 0 22px 54px rgba(17, 55, 63, .32);
+  transform: translateY(-3px);
+  background: var(--teal-deep);
+  box-shadow: 0 22px 54px rgba(7,24,28,.34);
   outline: none;
 }
 
 @media (max-width: 700px) {
-  .brand-icon {
-    width: 56px;
-    border-radius: 14%;
+  .circle-a {
+    width: 240px;
+    height: 240px;
+    left: -40px;
   }
 
-  .art { inset: -3% -14%; }
-
-  .circle-dark {
-    width: 54vw;
-    right: -8vw;
+  .circle-b {
+    width: 170px;
+    height: 170px;
+    right: -28px;
+    top: 64%;
   }
 
-  .circle-top { top: 4%; }
-  .circle-bottom { bottom: 5%; }
-
-  .circle-light {
-    width: 55vw;
-    left: -8vw;
-    bottom: 6%;
+  .triangle {
+    border-left-width: 80px;
+    border-right-width: 80px;
+    border-bottom-width: 230px;
   }
 
-  .point {
-    border-left-width: 19vw;
-    border-right-width: 19vw;
+  .triangle-b {
+    right: -20px;
+    top: 58%;
   }
 
-  .point-1 { left: -15%; }
-  .point-2 { left: 12%; }
-  .point-3 { left: 38%; }
-  .point-4 { left: 64%; }
-  .point-5 { left: 90%; }
-  .point-6 { display: none; }
+  .square-a {
+    width: 150px;
+    height: 150px;
+    right: -10px;
+  }
 
-  .square-1 { left: 28%; top: 26%; }
-  .square-2 { left: 44%; bottom: 20%; }
-  .square-3 { right: 25%; top: 56%; }
+  .square-b,
+  .square-c,
+  .square-d,
+  .circle-c {
+    display: none;
+  }
 
   .position-link {
     min-width: calc(100vw - 48px);
