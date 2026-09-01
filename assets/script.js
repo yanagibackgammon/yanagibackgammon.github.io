@@ -8,15 +8,13 @@
     const safeZone = {
       left: vw * 0.24,
       right: vw * 0.76,
-      top: vh * 0.24,
-      bottom: vh * 0.76,
+      top: vh * 0.18,
+      bottom: vh * 0.82,
     };
 
     shapes.forEach((shape) => {
       const style = getComputedStyle(shape);
-      if (style.display === 'none') {
-        return;
-      }
+      if (style.display === 'none') return;
 
       const isTriangle = shape.classList.contains('triangle');
       const width = isTriangle
@@ -47,12 +45,8 @@
       );
 
       const rotation = randomBetween(0, 360);
-      const scale = isTriangle
-        ? randomBetween(0.75, 1.22)
-        : randomBetween(0.82, 1.24);
-      const opacity = isTriangle
-        ? randomBetween(0.12, 0.34)
-        : randomBetween(0.55, 0.96);
+      const scale = isTriangle ? randomBetween(0.75, 1.22) : randomBetween(0.82, 1.24);
+      const opacity = isTriangle ? randomBetween(0.12, 0.34) : randomBetween(0.55, 0.96);
 
       shape.style.left = `${left}px`;
       shape.style.top = `${top}px`;
