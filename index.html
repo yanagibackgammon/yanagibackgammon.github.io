@@ -1,69 +1,36 @@
 <!doctype html>
-<html lang="ja" id="top">
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#4d966b">
-  <meta name="description" content="YANAGI Backgammon - Position Drill への入口となるトップページ。">
+  <meta name="theme-color" content="#529a70">
   <title>YANAGI Backgammon</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="./assets/yanagibackgammon-icon.png">
+  <link rel="apple-touch-icon" href="./assets/yanagibackgammon-icon.png">
   <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-  <div class="site-shell">
-    <div class="bg-art" aria-hidden="true">
-      <span class="shape circle circle-a"></span>
-      <span class="shape circle circle-b"></span>
-      <span class="shape circle circle-c"></span>
-      <span class="shape triangle triangle-a"></span>
-      <span class="shape triangle triangle-b"></span>
-      <span class="shape triangle triangle-c"></span>
-      <span class="shape square square-a"></span>
-      <span class="shape square square-b"></span>
-      <span class="shape square square-c"></span>
-      <span class="shape square square-d"></span>
+  <main class="landing" aria-label="YANAGI Backgammon">
+    <img class="brand-icon" src="./assets/yanagibackgammon-icon.png" alt="YANAGI Backgammon">
+
+    <div class="art" aria-hidden="true">
+      <span class="point point-1"></span>
+      <span class="point point-2"></span>
+      <span class="point point-3"></span>
+      <span class="point point-4"></span>
+      <span class="point point-5"></span>
+      <span class="point point-6"></span>
+
+      <span class="circle circle-dark circle-top"></span>
+      <span class="circle circle-dark circle-bottom"></span>
+      <span class="circle circle-light"></span>
+
+      <span class="square square-1"></span>
+      <span class="square square-2"></span>
+      <span class="square square-3"></span>
     </div>
 
-    <header class="site-header">
-      <div class="brand" aria-label="YANAGI Backgammon">
-        <div class="brand-mark" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="brand-copy">
-          <p class="brand-sub">PLAY / STUDY / REPEAT</p>
-          <h1>YANAGI Backgammon</h1>
-        </div>
-      </div>
-    </header>
-
-    <main class="hero">
-      <section class="hero-panel">
-        <p class="eyebrow">POSITION TRAINING TOOL</p>
-        <h2>Every position builds better judgment.</h2>
-        <p class="hero-text">
-          バックギャモンを、もっと深く、もっと日常的に。<br>
-          YANAGI Backgammon の学習ツール <strong>Position Drill</strong> へ進めるトップページです。
-        </p>
-
-        <div class="feature-row" aria-hidden="true">
-          <div class="feature-chip">CIRCLE</div>
-          <div class="feature-chip">TRIANGLE</div>
-          <div class="feature-chip">SQUARE</div>
-        </div>
-
-        <a class="cta-button" href="/position-drill/">Position Drill へ</a>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <p>© <span id="year"></span> YANAGI Backgammon</p>
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <a class="position-link" href="/position-drill/">POSITION DRILL</a>
+  </main>
 </body>
 </html>
