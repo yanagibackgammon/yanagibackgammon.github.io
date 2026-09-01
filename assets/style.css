@@ -45,6 +45,7 @@ body {
 .shape {
   position: absolute;
   opacity: .96;
+  will-change: transform, top, left, opacity;
 }
 
 .circle {
@@ -55,46 +56,34 @@ body {
 .circle-a {
   width: 360px;
   height: 360px;
-  top: -60px;
-  right: -30px;
 }
 
 .circle-b {
   width: 320px;
   height: 320px;
-  bottom: -40px;
-  left: -80px;
   background: var(--mist);
 }
 
 .circle-c {
   width: 220px;
   height: 220px;
-  top: 42%;
-  right: 6%;
 }
 
 .circle-d {
   width: 160px;
   height: 160px;
-  top: 16%;
-  left: 12%;
   background: rgba(22, 67, 79, .82);
 }
 
 .circle-e {
   width: 120px;
   height: 120px;
-  bottom: 18%;
-  left: 22%;
   background: rgba(232, 234, 255, .72);
 }
 
 .circle-f {
   width: 92px;
   height: 92px;
-  top: 26%;
-  left: 50%;
   background: rgba(22, 67, 79, .72);
 }
 
@@ -106,47 +95,19 @@ body {
   border-bottom: 360px solid rgba(232, 234, 255, 0.18);
 }
 
-.triangle-a {
-  top: -48px;
-  left: 2%;
-}
-
-.triangle-b {
-  top: -34px;
-  left: 20%;
+.triangle-b,
+.triangle-d,
+.triangle-g {
   border-bottom-color: rgba(22, 67, 79, 0.18);
 }
 
-.triangle-c {
-  top: -56px;
-  left: 40%;
-  border-bottom-color: rgba(232, 234, 255, 0.20);
-}
-
-.triangle-d {
-  top: -42px;
-  left: 62%;
-  border-bottom-color: rgba(22, 67, 79, 0.18);
-}
-
+.triangle-c,
 .triangle-e {
-  top: -38px;
-  left: 82%;
   border-bottom-color: rgba(232, 234, 255, 0.20);
 }
 
 .triangle-f {
-  bottom: -120px;
-  left: 48%;
-  transform: rotate(180deg);
   border-bottom-color: rgba(109,169,138,.34);
-}
-
-.triangle-g {
-  bottom: -140px;
-  right: 12%;
-  transform: rotate(180deg) scale(.9);
-  border-bottom-color: rgba(22, 67, 79, 0.18);
 }
 
 .content {
@@ -263,43 +224,27 @@ h1 {
   .circle-a {
     width: 280px;
     height: 280px;
-    top: -20px;
-    right: -80px;
   }
 
   .circle-b {
     width: 260px;
     height: 260px;
-    left: -70px;
-    bottom: 6%;
   }
 
   .circle-c {
     width: 180px;
     height: 180px;
-    right: -30px;
-    top: 54%;
   }
 
   .circle-d {
     width: 110px;
     height: 110px;
-    top: 22%;
-    left: 6%;
   }
 
   .circle-e,
   .circle-f {
     display: none;
   }
-
-  .triangle-a { left: -8%; }
-  .triangle-b { left: 12%; }
-  .triangle-c { left: 34%; }
-  .triangle-d { left: 58%; }
-  .triangle-e { left: 82%; }
-  .triangle-f { left: 42%; }
-  .triangle-g { right: -10%; }
 
   .content {
     gap: 20px;
