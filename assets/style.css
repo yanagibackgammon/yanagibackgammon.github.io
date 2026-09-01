@@ -97,51 +97,43 @@ h1 {
 }
 
 .action-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: inline-flex;
+  align-items: stretch;
   justify-content: center;
-  gap: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid rgba(232,234,255,.72);
+  box-shadow: 0 18px 46px rgba(7,24,28,.28);
+  backdrop-filter: blur(9px);
 }
 
-.position-link,
-.guide-link {
+.segment-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 64px;
-  padding: 18px 34px;
-  border: 1px solid rgba(232,234,255,.72);
-  border-radius: 999px;
+  padding: 18px 30px;
   color: var(--mist);
   text-decoration: none;
-  box-shadow: 0 18px 46px rgba(7,24,28,.28);
-  backdrop-filter: blur(9px);
+  font-size: clamp(14px, 1.7vw, 19px);
+  font-weight: 700;
+  letter-spacing: .04em;
+  background: rgba(255,255,255,.16);
   transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
 }
 
-.position-link {
-  min-width: min(78vw, 360px);
+.segment-link + .segment-link {
+  border-left: 1px solid rgba(232,234,255,.38);
+}
+
+.segment-link.is-primary {
   background: var(--teal-soft);
-  font-size: clamp(16px, 2vw, 22px);
   font-weight: 800;
-  letter-spacing: .08em;
 }
 
-.guide-link {
-  background: rgba(255,255,255,.16);
-  font-size: clamp(14px, 1.5vw, 18px);
-  font-weight: 700;
-  letter-spacing: .04em;
-}
-
-.position-link:hover,
-.position-link:focus-visible,
-.guide-link:hover,
-.guide-link:focus-visible {
-  transform: translateY(-3px);
+.segment-link:hover,
+.segment-link:focus-visible {
   background: #103640;
-  box-shadow: 0 22px 54px rgba(7,24,28,.34);
   outline: none;
 }
 
@@ -243,24 +235,22 @@ h1 {
 
   .action-links {
     width: 100%;
-    gap: 12px;
   }
 
-  .position-link,
-  .guide-link {
-    width: 100%;
+  .segment-link {
+    flex: 1 1 0;
     min-width: 0;
     min-height: 60px;
+    padding: 16px 12px;
+    font-size: 14px;
+    letter-spacing: .02em;
   }
 
-  .position-link { font-size: 15px; }
-  .guide-link { font-size: 14px; }
   .social-link { width: 52px; height: 52px; }
   .social-link svg { width: 24px; height: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .position-link,
-  .guide-link,
+  .segment-link,
   .social-link { transition: none; }
 }
