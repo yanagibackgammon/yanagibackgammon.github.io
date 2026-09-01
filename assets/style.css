@@ -1,6 +1,5 @@
 :root {
   --green: #4d966b;
-  --green-deep: #3e7d5a;
   --teal: #16434f;
   --teal-soft: rgba(22, 67, 79, 0.90);
   --mist: #e8eaff;
@@ -198,6 +197,41 @@ h1 {
   outline: none;
 }
 
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-link {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(232,234,255,.52);
+  box-shadow: 0 10px 26px rgba(7,24,28,.18);
+  backdrop-filter: blur(8px);
+  transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-3px);
+  background: rgba(22,67,79,.88);
+  box-shadow: 0 16px 34px rgba(7,24,28,.26);
+  outline: none;
+}
+
+.social-link svg {
+  width: 26px;
+  height: 26px;
+  fill: #ffffff;
+}
+
 @media (max-width: 700px) {
   .triangle {
     border-left-width: 78px;
@@ -257,8 +291,19 @@ h1 {
     min-height: 60px;
     font-size: 15px;
   }
+
+  .social-link {
+    width: 52px;
+    height: 52px;
+  }
+
+  .social-link svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .position-link { transition: none; }
+  .position-link,
+  .social-link { transition: none; }
 }
