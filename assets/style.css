@@ -65,15 +65,15 @@ body {
   height: 0;
   border-left: 110px solid transparent;
   border-right: 110px solid transparent;
-  border-bottom: 360px solid rgba(232, 234, 255, 0.30);
+  border-bottom: 360px solid rgba(232, 234, 255, 0.42);
 }
 
 .triangle-b,
 .triangle-d,
-.triangle-g { border-bottom-color: rgba(22, 67, 79, 0.28); }
+.triangle-g { border-bottom-color: rgba(22, 67, 79, 0.38); }
 .triangle-c,
-.triangle-e { border-bottom-color: rgba(232, 234, 255, 0.34); }
-.triangle-f { border-bottom-color: rgba(109,169,138,.44); }
+.triangle-e { border-bottom-color: rgba(232, 234, 255, 0.44); }
+.triangle-f { border-bottom-color: rgba(109,169,138,.56); }
 
 .content {
   position: relative;
