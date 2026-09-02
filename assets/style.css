@@ -106,7 +106,7 @@ h1 {
 .system-text-link {
   color: #ffffff;
   text-decoration: none;
-  font-size: clamp(16px, 1.8vw, 20px);
+  font-size: clamp(20px, 2.2vw, 26px);
   font-weight: 800;
   line-height: 1.4;
 }
@@ -123,7 +123,7 @@ h1 {
   justify-content: center;
   gap: 6px;
   color: #ffffff;
-  font-size: clamp(16px, 1.8vw, 20px);
+  font-size: clamp(20px, 2.2vw, 26px);
   line-height: 1.4;
 }
 
@@ -142,9 +142,7 @@ h1 {
 }
 
 .guide-text-link {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 .position-text-link:hover,
