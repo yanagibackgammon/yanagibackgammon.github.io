@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4d966b">
+  <meta name="description" content="バックギャモンのマッチエクイティテーブルと2倍・4倍テイクライン">
+  <title>マッチエクイティテーブル | YANAGI Backgammon</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="landing met-landing" aria-label="マッチエクイティテーブル">
+    <div class="bg-art" aria-hidden="true">
+      <span class="shape circle circle-a"></span>
+      <span class="shape circle circle-b"></span>
+      <span class="shape circle circle-c"></span>
+      <span class="shape circle circle-d"></span>
+      <span class="shape circle circle-e"></span>
+      <span class="shape circle circle-f"></span>
+
+      <span class="shape triangle triangle-a"></span>
+      <span class="shape triangle triangle-b"></span>
+      <span class="shape triangle triangle-c"></span>
+      <span class="shape triangle triangle-d"></span>
+      <span class="shape triangle triangle-e"></span>
+      <span class="shape triangle triangle-f"></span>
+      <span class="shape triangle triangle-g"></span>
+    </div>
+
+    <div class="content met-content">
+      <h1>マッチエクイティテーブル</h1>
+
+      <section class="met-section" aria-labelledby="met-heading">
+        <div class="section-title-row">
+          <h2 id="met-heading">マッチエクイティテーブル</h2>
+          <p>上段：四捨五入整数 ／ 下段：小数第2位まで</p>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table id="met-table" class="met-table" aria-label="9-away × 9-away マッチエクイティテーブル"></table>
+          </div>
+        </div>
+      </section>
+
+      <section class="met-section" aria-labelledby="take2-heading">
+        <div class="section-title-row">
+          <h2 id="take2-heading">2倍テイクライン</h2>
+          <p>上段：最大ショット数（36通り） ／ 下段：テイクライン</p>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table id="take2-table" class="met-table" aria-label="2倍テイクライン"></table>
+          </div>
+        </div>
+      </section>
+
+      <section class="met-section" aria-labelledby="take4-heading">
+        <div class="section-title-row">
+          <h2 id="take4-heading">4倍テイクライン</h2>
+          <p>上段：最大ショット数（36通り） ／ 下段：テイクライン</p>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table id="take4-table" class="met-table" aria-label="4倍テイクライン"></table>
+          </div>
+        </div>
+      </section>
+
+      <div class="met-footer">
+        <p>MET: Rockwell–Kazaross</p>
+        <p>テイクラインはマッチエクイティから、ギャモンを含まない単純な勝敗モデルで算出しています。</p>
+        <a href="../">YANAGI Backgammon</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/script.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
