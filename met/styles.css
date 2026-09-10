@@ -119,7 +119,7 @@
   display:block;
   margin-top:5px;
   color:#697177;
-  font-size:10px;
+  font-size:12px;
   font-weight:800;
   line-height:1;
   font-variant-numeric:tabular-nums;
@@ -198,7 +198,7 @@
 
   .cell-secondary{
     margin-top:4px;
-    font-size:7px;
+    font-size:8.5px;
     letter-spacing:-.02em;
   }
 }
@@ -227,6 +227,6 @@
   }
 
   .cell-secondary{
-    font-size:6.6px;
+    font-size:8px;
   }
 }

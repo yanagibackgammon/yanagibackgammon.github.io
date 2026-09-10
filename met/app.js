@@ -29,10 +29,13 @@
   }
 
   function takeCellColor(shots) {
-    // 36 -> red, then yellow -> green -> blue as the value gets smaller.
-    const ratio = Math.max(0, Math.min(1, shots / 36));
+    // Use the actual displayed range so the color differences stay clear.
+    // Larger values: red -> yellow -> green -> blue as the value gets smaller.
+    const minShots = 18;
+    const maxShots = 30;
+    const ratio = Math.max(0, Math.min(1, (shots - minShots) / (maxShots - minShots)));
     const hue = (1 - ratio) * 220;
-    return `hsl(${hue.toFixed(1)} 78% 88%)`;
+    return `hsl(${hue.toFixed(1)} 88% 80%)`;
   }
 
   function axisHeader() {
