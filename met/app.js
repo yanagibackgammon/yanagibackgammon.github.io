@@ -158,12 +158,12 @@
 
   function tendencyLabel(kind) {
     if (kind === 'take') {
-      return '<span class="tendency-word">テイク</span><span class="tendency-suffix">寄り</span>';
+      return '<span class="tendency-word">テイク</span>';
     }
     if (kind === 'pass') {
-      return '<span class="tendency-word">パス</span><span class="tendency-suffix">寄り</span>';
+      return '<span class="tendency-word">パス</span>';
     }
-    return '<span class="tendency-word">アンリミ</span><span class="tendency-suffix">と同程度</span>';
+    return '<span class="tendency-word">アンリミ</span>';
   }
 
   function renderTendencyTable() {
