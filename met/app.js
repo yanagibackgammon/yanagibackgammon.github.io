@@ -23,9 +23,12 @@
     return Math.max(0, Math.min(1, point));
   }
 
-  function maxShots(takePointValue) {
-    const raw = 36 * (1 - takePointValue);
-    return Math.max(0, Math.min(36, Math.floor(raw + 1e-10)));
+  function maxHittingRollsForTake(takePointValue) {
+    // Simple shot model: a hit is a loss, a miss is a win for the taker.
+    // Take is possible while (36 - hitRolls) / 36 >= takePointValue.
+    // Therefore hitRolls <= 36 * (1 - takePointValue).
+    const maxHitRolls = 36 * (1 - takePointValue);
+    return Math.max(0, Math.min(36, Math.floor(maxHitRolls + 1e-10)));
   }
 
   function takeCellColor(shots) {
@@ -84,11 +87,11 @@
         }
 
         const point = takePoint(playerAway, opponentAway, offeredCube);
-        const shots = maxShots(point);
-        const cellColor = takeCellColor(shots);
+        const maxHitRolls = maxHittingRollsForTake(point);
+        const cellColor = takeCellColor(maxHitRolls);
         html += `
           <td class="met-cell" style="background:${cellColor}">
-            <span class="cell-primary">${shots}</span>
+            <span class="cell-primary">${maxHitRolls}</span>
             <span class="cell-secondary">${(point * 100).toFixed(2)}%</span>
           </td>`;
       }
