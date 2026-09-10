@@ -28,6 +28,13 @@
     return Math.max(0, Math.min(36, Math.floor(raw + 1e-10)));
   }
 
+  function takeCellColor(shots) {
+    // 36 -> red, then yellow -> green -> blue as the value gets smaller.
+    const ratio = Math.max(0, Math.min(1, shots / 36));
+    const hue = (1 - ratio) * 220;
+    return `hsl(${hue.toFixed(1)} 78% 88%)`;
+  }
+
   function axisHeader() {
     let html = '<thead><tr><th class="corner">away</th>';
     for (let away = MIN_AWAY; away <= MAX_AWAY; away += 1) {
@@ -75,8 +82,9 @@
 
         const point = takePoint(playerAway, opponentAway, offeredCube);
         const shots = maxShots(point);
+        const cellColor = takeCellColor(shots);
         html += `
-          <td class="met-cell">
+          <td class="met-cell" style="background:${cellColor}">
             <span class="cell-primary">${shots}</span>
             <span class="cell-secondary">${(point * 100).toFixed(2)}%</span>
           </td>`;
