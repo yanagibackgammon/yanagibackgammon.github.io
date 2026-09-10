@@ -92,35 +92,100 @@
     table.innerHTML = html;
   }
 
+  function theoryTendency(playerAway, opponentAway) {
+    // Qualitative match-play guide for an initial double (1 -> 2), relative
+    // to unlimited/money play. It intentionally gives direction rather than
+    // an exact take point because gammon rates and recube efficiency are
+    // position-dependent.
+
+    if (playerAway === 2) {
+      if (opponentAway === 2) {
+        return { kind: 'pass', note: 'Cube死・G無価値' };
+      }
+      if (opponentAway === 3) {
+        return { kind: 'pass', note: 'リダブル不可／相手G多で厳しい' };
+      }
+      if (opponentAway === 4) {
+        return { kind: 'take', note: '低Gなら強い／相手G多で反転' };
+      }
+      if (opponentAway % 2 === 0) {
+        return { kind: 'take', note: '低Gなら取りやすい／G注意' };
+      }
+      return { kind: 'pass', note: '奇数away傾向／相手G多で厳しい' };
+    }
+
+    if (playerAway === 3) {
+      if (opponentAway === 2) {
+        return { kind: 'take', note: 'Take後のリダブルが強力' };
+      }
+      if (opponentAway === 3) {
+        return { kind: 'pass', note: '同点でもTP高め' };
+      }
+      if (opponentAway === 4) {
+        return { kind: 'take', note: '低Gなら取りやすい／相手G多で慎重' };
+      }
+      return { kind: 'pass', note: 'リード側は慎重／低Gなら緩和' };
+    }
+
+    if (playerAway === 4) {
+      if (opponentAway === 2) {
+        return { kind: 'take', note: '即リダブルが強力' };
+      }
+      if (opponentAway === 3) {
+        return { kind: 'even', note: '自分G多でTake／相手G多でPass' };
+      }
+      if (opponentAway === 4) {
+        return { kind: 'even', note: '概ねマネー型' };
+      }
+      if (opponentAway >= 7) {
+        return { kind: 'pass', note: '大差リードは慎重' };
+      }
+      return { kind: 'even', note: 'やや慎重／G率で変動' };
+    }
+
+    // Farther from the end of the match, close scores are generally
+    // money-like. With a meaningful deficit the trailer benefits from cube
+    // leverage, while a large leader can afford to be more conservative.
+    const gap = playerAway - opponentAway;
+    if (gap >= 2) {
+      return { kind: 'take', note: 'トレーラー／リダブル価値あり' };
+    }
+    if (gap <= -2) {
+      return { kind: 'pass', note: 'リード側はやや慎重' };
+    }
+    return { kind: 'even', note: '概ねマネー型／G率で変動' };
+  }
+
+  function tendencyLabel(kind) {
+    if (kind === 'take') {
+      return '<span class="tendency-word">テイク</span><span class="tendency-suffix">寄り</span>';
+    }
+    if (kind === 'pass') {
+      return '<span class="tendency-word">パス</span><span class="tendency-suffix">寄り</span>';
+    }
+    return '<span class="tendency-word">アンリミ</span><span class="tendency-suffix">寄り</span>';
+  }
+
   function renderTendencyTable() {
     const table = document.getElementById('tendency-table');
     if (!table) return;
 
-    const unlimitedTakePoint = 0.25;
     let html = axisHeader() + '<tbody>';
 
     for (let playerAway = MIN_AWAY; playerAway <= MAX_AWAY; playerAway += 1) {
       html += `<tr><th class="black-axis">${playerAway}a</th>`;
       for (let opponentAway = MIN_AWAY; opponentAway <= MAX_AWAY; opponentAway += 1) {
-        const point = takePoint(playerAway, opponentAway, 2);
-        const diffPoints = (point - unlimitedTakePoint) * 100;
-        let label = '同等';
-        let toneClass = 'tendency-even';
+        const tendency = theoryTendency(playerAway, opponentAway);
+        const toneClass = tendency.kind === 'take'
+          ? 'tendency-take'
+          : tendency.kind === 'pass'
+            ? 'tendency-pass'
+            : 'tendency-even';
 
-        if (diffPoints < -1e-9) {
-          label = 'テイク寄り';
-          toneClass = 'tendency-take';
-        } else if (diffPoints > 1e-9) {
-          label = 'パス寄り';
-          toneClass = 'tendency-pass';
-        }
-
-        const sign = diffPoints > 0 ? '+' : diffPoints < 0 ? '−' : '±';
-        const absDiff = Math.abs(diffPoints).toFixed(2);
         html += `
           <td class="met-cell tendency-cell ${toneClass}">
-            <span class="cell-primary tendency-primary">${label}</span>
-            <span class="cell-secondary">TP ${(point * 100).toFixed(2)}%（${sign}${absDiff}pt）</span>
+            <span class="cell-primary tendency-primary">${tendencyLabel(tendency.kind)}</span>
+            <span class="tendency-condition">${tendency.note}</span>
           </td>`;
       }
       html += '</tr>';

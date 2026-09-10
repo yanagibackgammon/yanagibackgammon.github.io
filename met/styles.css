@@ -395,17 +395,43 @@
 }
 
 .tendency-primary{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:2px;
   font-size:18px;
+  white-space:nowrap;
 }
 
+.tendency-word{
+  font-size:1em;
+}
+
+.tendency-suffix{
+  font-size:.5em;
+  font-weight:900;
+}
+
+
+.tendency-condition{
+  display:block;
+  margin-top:6px;
+  padding:0 2px;
+  color:#596167;
+  font-size:8px;
+  font-weight:800;
+  line-height:1.2;
+}
 @media(max-width:700px){
   .tendency-primary{
+    gap:1px;
     font-size:12px;
   }
 
-  .tendency-table .cell-secondary{
-    font-size:7.5px;
-    letter-spacing:-.04em;
+  .tendency-condition{
+    margin-top:4px;
+    font-size:6.7px;
+    line-height:1.15;
   }
 }
 
@@ -414,7 +440,7 @@
     font-size:11px;
   }
 
-  .tendency-table .cell-secondary{
-    font-size:7px;
+  .tendency-condition{
+    font-size:6.2px;
   }
 }
