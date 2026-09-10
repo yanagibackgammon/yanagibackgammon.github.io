@@ -163,7 +163,7 @@
     if (kind === 'pass') {
       return '<span class="tendency-word">パス</span><span class="tendency-suffix">寄り</span>';
     }
-    return '<span class="tendency-word">アンリミ</span><span class="tendency-suffix">寄り</span>';
+    return '<span class="tendency-word">アンリミと同程度</span>';
   }
 
   function renderTendencyTable() {
