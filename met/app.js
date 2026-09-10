@@ -65,6 +65,14 @@
     for (let playerAway = MIN_AWAY; playerAway <= MAX_AWAY; playerAway += 1) {
       html += `<tr><th class="black-axis">${playerAway}a</th>`;
       for (let opponentAway = MIN_AWAY; opponentAway <= MAX_AWAY; opponentAway += 1) {
+        if (offeredCube === 4 && opponentAway === 2) {
+          html += `
+          <td class="met-cell">
+            <span class="cell-primary">ー</span>
+          </td>`;
+          continue;
+        }
+
         const point = takePoint(playerAway, opponentAway, offeredCube);
         const shots = maxShots(point);
         html += `
