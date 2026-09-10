@@ -11,16 +11,37 @@
     return MET[playerAway - 1][opponentAway - 1];
   }
 
-  function takePoint(playerAway, opponentAway, offeredCube) {
+  function takePointDetails(playerAway, opponentAway, offeredCube) {
     const currentCube = offeredCube / 2;
-    const passEquity = matchEquity(playerAway, opponentAway - currentCube);
-    const takeWinEquity = matchEquity(playerAway - offeredCube, opponentAway);
-    const takeLoseEquity = matchEquity(playerAway, opponentAway - offeredCube);
+    const passOpponentAway = opponentAway - currentCube;
+    const winPlayerAway = playerAway - offeredCube;
+    const loseOpponentAway = opponentAway - offeredCube;
+    const passEquity = matchEquity(playerAway, passOpponentAway);
+    const takeWinEquity = matchEquity(winPlayerAway, opponentAway);
+    const takeLoseEquity = matchEquity(playerAway, loseOpponentAway);
     const range = takeWinEquity - takeLoseEquity;
+    const rawPoint = range <= 0 ? 0 : (passEquity - takeLoseEquity) / range;
+    const point = Math.max(0, Math.min(1, rawPoint));
 
-    if (range <= 0) return 0;
-    const point = (passEquity - takeLoseEquity) / range;
-    return Math.max(0, Math.min(1, point));
+    return {
+      playerAway,
+      opponentAway,
+      offeredCube,
+      currentCube,
+      passOpponentAway,
+      winPlayerAway,
+      loseOpponentAway,
+      passEquity,
+      takeWinEquity,
+      takeLoseEquity,
+      range,
+      rawPoint,
+      point
+    };
+  }
+
+  function takePoint(playerAway, opponentAway, offeredCube) {
+    return takePointDetails(playerAway, opponentAway, offeredCube).point;
   }
 
   function maxHittingRollsForTake(takePointValue) {
@@ -42,7 +63,7 @@
   }
 
   function axisHeader() {
-    let html = '<thead><tr><th class="corner">away</th>';
+    let html = '<thead><tr><th class="corner" aria-label="away"></th>';
     for (let away = MIN_AWAY; away <= MAX_AWAY; away += 1) {
       html += `<th>${away}a</th>`;
     }
@@ -86,11 +107,12 @@
           continue;
         }
 
-        const point = takePoint(playerAway, opponentAway, offeredCube);
+        const details = takePointDetails(playerAway, opponentAway, offeredCube);
+        const point = details.point;
         const maxHitRolls = maxHittingRollsForTake(point);
         const cellColor = takeCellColor(maxHitRolls);
         html += `
-          <td class="met-cell" style="background:${cellColor}">
+          <td class="met-cell take-cell" style="background:${cellColor}" tabindex="0" role="button" aria-label="自分${playerAway}a 相手${opponentAway}a ${offeredCube}倍テイクラインの計算式を表示" data-player-away="${playerAway}" data-opponent-away="${opponentAway}" data-offered-cube="${offeredCube}">
             <span class="cell-primary">${maxHitRolls}</span>
             <span class="cell-secondary">${(point * 100).toFixed(2)}%</span>
           </td>`;
@@ -102,7 +124,116 @@
     table.innerHTML = html;
   }
 
+
+  function formatPct(value) {
+    return `${(value * 100).toFixed(2)}%`;
+  }
+
+  function awayLabel(value) {
+    return value <= 0 ? '0a（マッチ勝利）' : `${value}a`;
+  }
+
+  function ensureFormulaModal() {
+    let modal = document.getElementById('take-formula-modal');
+    if (modal) return modal;
+
+    modal = document.createElement('div');
+    modal.id = 'take-formula-modal';
+    modal.className = 'formula-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <div class="formula-modal-backdrop" data-modal-close></div>
+      <section class="formula-modal-panel" role="dialog" aria-modal="true" aria-labelledby="take-formula-title">
+        <button class="formula-modal-close" type="button" aria-label="閉じる" data-modal-close>×</button>
+        <h3 id="take-formula-title"></h3>
+        <div id="take-formula-body" class="formula-modal-body"></div>
+      </section>`;
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', (event) => {
+      if (event.target.closest('[data-modal-close]')) closeFormulaModal();
+    });
+    return modal;
+  }
+
+  function showFormulaModal(playerAway, opponentAway, offeredCube) {
+    const details = takePointDetails(playerAway, opponentAway, offeredCube);
+    const maxHitRolls = maxHittingRollsForTake(details.point);
+    const modal = ensureFormulaModal();
+    const title = modal.querySelector('#take-formula-title');
+    const body = modal.querySelector('#take-formula-body');
+
+    title.textContent = `${offeredCube}倍テイクライン：自分 ${playerAway}a ／ 相手 ${opponentAway}a`;
+    body.innerHTML = `
+      <div class="formula-step">
+        <strong>1. Passした場合</strong>
+        <div>MET（自分 ${playerAway}a ／ 相手 ${awayLabel(details.passOpponentAway)}）</div>
+        <div class="formula-value">P = ${formatPct(details.passEquity)}</div>
+      </div>
+      <div class="formula-step">
+        <strong>2. Takeして勝った場合</strong>
+        <div>MET（自分 ${awayLabel(details.winPlayerAway)} ／ 相手 ${opponentAway}a）</div>
+        <div class="formula-value">W = ${formatPct(details.takeWinEquity)}</div>
+      </div>
+      <div class="formula-step">
+        <strong>3. Takeして負けた場合</strong>
+        <div>MET（自分 ${playerAway}a ／ 相手 ${awayLabel(details.loseOpponentAway)}）</div>
+        <div class="formula-value">L = ${formatPct(details.takeLoseEquity)}</div>
+      </div>
+      <div class="formula-step formula-result">
+        <strong>4. テイクライン</strong>
+        <div class="formula-equation">(P − L) ÷ (W − L)</div>
+        <div class="formula-equation">(${details.passEquity.toFixed(6)} − ${details.takeLoseEquity.toFixed(6)}) ÷ (${details.takeWinEquity.toFixed(6)} − ${details.takeLoseEquity.toFixed(6)})</div>
+        <div class="formula-value">= ${formatPct(details.point)}</div>
+      </div>
+      <div class="formula-step formula-result">
+        <strong>5. ヒットされてもテイクできる最大目数</strong>
+        <div class="formula-equation">⌊36 × (1 − ${details.point.toFixed(6)})⌋</div>
+        <div class="formula-value">= ${maxHitRolls}通り</div>
+      </div>`;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('formula-modal-open');
+    const closeButton = modal.querySelector('.formula-modal-close');
+    closeButton.focus();
+  }
+
+  function closeFormulaModal() {
+    const modal = document.getElementById('take-formula-modal');
+    if (!modal || !modal.classList.contains('is-open')) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('formula-modal-open');
+  }
+
+  function bindTakeCellPopups() {
+    document.addEventListener('click', (event) => {
+      const cell = event.target.closest('.take-cell');
+      if (!cell) return;
+      showFormulaModal(
+        Number(cell.dataset.playerAway),
+        Number(cell.dataset.opponentAway),
+        Number(cell.dataset.offeredCube)
+      );
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeFormulaModal();
+        return;
+      }
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const cell = event.target.closest('.take-cell');
+      if (!cell) return;
+      event.preventDefault();
+      cell.click();
+    });
+  }
+
+
   renderMetTable();
   renderTakeTable('take2-table', 2);
   renderTakeTable('take4-table', 4);
+  bindTakeCellPopups();
 })();

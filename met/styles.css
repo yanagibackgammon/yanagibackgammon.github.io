@@ -230,3 +230,149 @@
     font-size:8px;
   }
 }
+
+.take-cell{
+  cursor:pointer;
+  transition:filter .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.take-cell:hover,
+.take-cell:focus-visible{
+  filter:saturate(1.18) brightness(.98);
+  outline:2px solid rgba(17,17,17,.72);
+  outline-offset:-3px;
+}
+
+.take-cell:active{
+  transform:scale(.985);
+}
+
+.formula-modal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.formula-modal.is-open{
+  display:flex;
+}
+
+.formula-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  backdrop-filter:blur(4px);
+}
+
+.formula-modal-panel{
+  position:relative;
+  z-index:1;
+  width:min(620px,100%);
+  max-height:min(82vh,760px);
+  overflow:auto;
+  padding:24px;
+  border-radius:18px;
+  background:#fff;
+  color:#111;
+  box-shadow:0 24px 80px rgba(0,0,0,.34);
+}
+
+.formula-modal-panel h3{
+  margin:0 44px 18px 0;
+  font-size:20px;
+  line-height:1.4;
+}
+
+.formula-modal-close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:#eee;
+  color:#111;
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.formula-modal-body{
+  display:grid;
+  gap:10px;
+}
+
+.formula-step{
+  padding:12px 14px;
+  border:1px solid #d9dddf;
+  border-radius:12px;
+  background:#fafafa;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.formula-step strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:14px;
+}
+
+.formula-result{
+  background:#f3f5f5;
+}
+
+.formula-equation{
+  overflow-wrap:anywhere;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12px;
+}
+
+.formula-value{
+  margin-top:3px;
+  font-size:17px;
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+}
+
+.formula-modal-open{
+  overflow:hidden;
+}
+
+@media(max-width:700px){
+  .formula-modal{
+    padding:10px;
+  }
+
+  .formula-modal-panel{
+    max-height:88vh;
+    padding:18px 14px 16px;
+    border-radius:14px;
+  }
+
+  .formula-modal-panel h3{
+    margin-right:40px;
+    font-size:17px;
+  }
+
+  .formula-step{
+    padding:10px 11px;
+    font-size:12px;
+  }
+
+  .formula-step strong{
+    font-size:13px;
+  }
+
+  .formula-equation{
+    font-size:11px;
+  }
+
+  .formula-value{
+    font-size:16px;
+  }
+}
