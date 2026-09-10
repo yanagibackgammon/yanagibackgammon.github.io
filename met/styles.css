@@ -376,3 +376,45 @@
     font-size:16px;
   }
 }
+
+
+.tendency-cell{
+  background:#f8f8f7;
+}
+
+.tendency-cell.tendency-take{
+  background:#e9f3ff;
+}
+
+.tendency-cell.tendency-pass{
+  background:#ffecec;
+}
+
+.tendency-cell.tendency-even{
+  background:#f1f1ef;
+}
+
+.tendency-primary{
+  font-size:18px;
+}
+
+@media(max-width:700px){
+  .tendency-primary{
+    font-size:12px;
+  }
+
+  .tendency-table .cell-secondary{
+    font-size:7.5px;
+    letter-spacing:-.04em;
+  }
+}
+
+@media(max-width:390px){
+  .tendency-primary{
+    font-size:11px;
+  }
+
+  .tendency-table .cell-secondary{
+    font-size:7px;
+  }
+}

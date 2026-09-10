@@ -92,6 +92,44 @@
     table.innerHTML = html;
   }
 
+  function renderTendencyTable() {
+    const table = document.getElementById('tendency-table');
+    if (!table) return;
+
+    const unlimitedTakePoint = 0.25;
+    let html = axisHeader() + '<tbody>';
+
+    for (let playerAway = MIN_AWAY; playerAway <= MAX_AWAY; playerAway += 1) {
+      html += `<tr><th class="black-axis">${playerAway}a</th>`;
+      for (let opponentAway = MIN_AWAY; opponentAway <= MAX_AWAY; opponentAway += 1) {
+        const point = takePoint(playerAway, opponentAway, 2);
+        const diffPoints = (point - unlimitedTakePoint) * 100;
+        let label = '同等';
+        let toneClass = 'tendency-even';
+
+        if (diffPoints < -1e-9) {
+          label = 'テイク寄り';
+          toneClass = 'tendency-take';
+        } else if (diffPoints > 1e-9) {
+          label = 'パス寄り';
+          toneClass = 'tendency-pass';
+        }
+
+        const sign = diffPoints > 0 ? '+' : diffPoints < 0 ? '−' : '±';
+        const absDiff = Math.abs(diffPoints).toFixed(2);
+        html += `
+          <td class="met-cell tendency-cell ${toneClass}">
+            <span class="cell-primary tendency-primary">${label}</span>
+            <span class="cell-secondary">TP ${(point * 100).toFixed(2)}%（${sign}${absDiff}pt）</span>
+          </td>`;
+      }
+      html += '</tr>';
+    }
+
+    html += '</tbody>';
+    table.innerHTML = html;
+  }
+
   function renderTakeTable(tableId, offeredCube) {
     const table = document.getElementById(tableId);
     let html = axisHeader() + '<tbody>';
@@ -233,6 +271,7 @@
 
 
   renderMetTable();
+  renderTendencyTable();
   renderTakeTable('take2-table', 2);
   renderTakeTable('take4-table', 4);
   bindTakeCellPopups();
