@@ -112,7 +112,7 @@
         const maxHitRolls = maxHittingRollsForTake(point);
         const cellColor = takeCellColor(maxHitRolls);
         html += `
-          <td class="met-cell take-cell" style="background:${cellColor}" tabindex="0" role="button" aria-label="自分${playerAway}a 相手${opponentAway}a ${offeredCube}倍テイクラインの計算式を表示" data-player-away="${playerAway}" data-opponent-away="${opponentAway}" data-offered-cube="${offeredCube}">
+          <td class="met-cell take-cell" style="background:${cellColor}" tabindex="0" role="button" aria-label="自分${playerAway}a 相手${opponentAway}a ${offeredCube}倍テイクポイントの計算式を表示" data-player-away="${playerAway}" data-opponent-away="${opponentAway}" data-offered-cube="${offeredCube}">
             <span class="cell-primary">${maxHitRolls}</span>
             <span class="cell-secondary">${(point * 100).toFixed(2)}%</span>
           </td>`;
@@ -163,7 +163,7 @@
     const title = modal.querySelector('#take-formula-title');
     const body = modal.querySelector('#take-formula-body');
 
-    title.textContent = `${offeredCube}倍テイクライン：自分 ${playerAway}a ／ 相手 ${opponentAway}a`;
+    title.textContent = `${offeredCube}倍テイクポイント：自分 ${playerAway}a ／ 相手 ${opponentAway}a`;
     body.innerHTML = `
       <div class="formula-step">
         <strong>1. Passした場合</strong>
@@ -181,7 +181,7 @@
         <div class="formula-value">L = ${formatPct(details.takeLoseEquity)}</div>
       </div>
       <div class="formula-step formula-result">
-        <strong>4. テイクライン</strong>
+        <strong>4. テイクポイント</strong>
         <div class="formula-equation">(P − L) ÷ (W − L)</div>
         <div class="formula-equation">(${details.passEquity.toFixed(6)} − ${details.takeLoseEquity.toFixed(6)}) ÷ (${details.takeWinEquity.toFixed(6)} − ${details.takeLoseEquity.toFixed(6)})</div>
         <div class="formula-value">= ${formatPct(details.point)}</div>
